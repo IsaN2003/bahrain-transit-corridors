@@ -1,0 +1,8 @@
+pandas
+pyarrow
+requests
+python-dotenv
+streamlit
+pydeck
+plotly
+anthropic
