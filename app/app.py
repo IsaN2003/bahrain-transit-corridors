@@ -309,7 +309,7 @@ with main_col:
     trend = (
         alt.Chart(yearly).mark_bar()
         .encode(
-            x=alt.X("year:O", title=None),
+            x=alt.X("year:O", title=None, axis=alt.Axis(labelAngle=0)),
             y=alt.Y("usd_m:Q", title="US$ million"),
             color=color_enc,
             tooltip=[alt.Tooltip("year:O", title="Year"),
