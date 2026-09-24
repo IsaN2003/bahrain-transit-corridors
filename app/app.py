@@ -34,8 +34,8 @@ def load_monthly():
 
 @st.cache_data
 def load_names():
-    from src.corridors import iso_name_map
-    return iso_name_map()
+    from src.ai_tools import name_map
+    return name_map()
 
 @st.cache_data
 def load_ai_df():

@@ -1,9 +1,11 @@
 .venv/
 venv2/
 data/raw/
-data/processed/
 .env
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
 get-pip.py
+data/processed/import.parquet
+data/processed/reexport.parquet
+data/processed/national_export.parquet

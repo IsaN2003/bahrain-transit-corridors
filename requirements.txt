@@ -1,8 +1,8 @@
-pandas
-pyarrow
-requests
-python-dotenv
 streamlit
+pandas
+numpy
+pyarrow
+altair
 pydeck
-plotly
 anthropic
+python-dotenv

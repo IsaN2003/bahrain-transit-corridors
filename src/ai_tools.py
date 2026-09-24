@@ -10,7 +10,7 @@ a small JSON-friendly dict it can read and talk about.
 from pathlib import Path
 import pandas as pd
 import json
-from src.corridors import iso_name_map
+
 
 # project root = two levels up from this file (src/ai_tools.py -> repo root)
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,6 +26,13 @@ GROUP_COLS = {
     "year": ["year"],
 }
 
+def name_map():
+    """iso2 -> country name, from the shipped corridor_totals file (no heavy panels)."""
+    ct = pd.read_parquet(PROC / "corridor_totals_hs87.parquet")
+    o = ct[["origin", "origin_name"]].rename(columns={"origin": "code", "origin_name": "name"})
+    d = ct[["dest", "dest_name"]].rename(columns={"dest": "code", "dest_name": "name"})
+    m = pd.concat([o, d]).dropna().drop_duplicates("code")
+    return dict(zip(m["code"], m["name"]))
 
 def load_named_corridors():
     """Full monthly corridor data with country names attached (for the AI tool)."""
@@ -35,7 +42,7 @@ def load_named_corridors():
 
     # the corridor table only has 2-letter ISO codes (e.g. "SA"); swap in
     # readable names so the model can match things like "Saudi" in a question
-    names = iso_name_map()
+    names = name_map()
     df["origin_name"] = df["origin"].map(names)
     df["dest_name"] = df["dest"].map(names)
     return df
